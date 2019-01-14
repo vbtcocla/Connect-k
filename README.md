@@ -8,3 +8,4 @@ If you have any questions, please read the student manual first, and then ask on
 
 ## Updates
 **01/10/2019:** Report template has been available.
+**01/14/2019:** Sample AI (Random AI) has been available.
