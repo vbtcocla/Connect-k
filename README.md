@@ -10,5 +10,5 @@ If you have any questions, please read the student manual first, and then ask on
 **01/10/2019:** <br>
 Report template has been available.<br>
 **01/14/2019:** <br>
-Sample AI (Random AI) has been available.<br>
+Sample AI (Random AI/Poor AI) has been available.<br>
 Fixed an issue caused C++ shell cannot compile<br>
