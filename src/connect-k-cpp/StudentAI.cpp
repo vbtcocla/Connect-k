@@ -1,4 +1,5 @@
 #include "StudentAI.h"
+#include <stdlib.h>
 
 //The following part should be completed by students.
 //The students can modify anything except the class name and exisiting functions and varibles.
