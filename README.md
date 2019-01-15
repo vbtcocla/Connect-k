@@ -7,5 +7,8 @@ Please read the [student manual](https://gitlab.ics.uci.edu/ai-projects/Connect_
 If you have any questions, please read the student manual first, and then ask on piazza or coding clinic.
 
 ## Updates
-**01/10/2019:** Report template has been available.<br>
-**01/14/2019:** Sample AI (Random AI) has been available.
+**01/10/2019:** <br>
+Report template has been available.<br>
+**01/14/2019:** <br>
+Sample AI (Random AI) has been available.<br>
+Fixed an issue caused C++ shell cannot compile<br>
