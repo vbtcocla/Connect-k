@@ -2,11 +2,11 @@ from sys import argv
 from tournament import game_main_loop
 
 def get_prefix(ai):
-    if ai.endswith('_cpp'):
+    if ai.endswith('.exe'):
         ai = './'+ai
-    elif ai.endswith('_py'):
+    elif ai.endswith('.py') or ai.endswith('.pyc') :
         ai = 'python3 '+ai
-    elif ai.endswith('_jar'):
+    elif ai.endswith('.jar'):
         ai = 'java -jar ' + ai
     return ai
 if __name__ == '__main__':
