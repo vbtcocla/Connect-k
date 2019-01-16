@@ -47,7 +47,15 @@ public class GameLogic {
 			player = player == 1 ? 2 : 1;
 
 		}
-		System.out.println("Player " + winPlayer + " wins!");
+		if (winPlayer == -1)
+		{
+		    System.out.println("Tie");
+		}
+		else
+		{
+		    System.out.println("Player " + winPlayer + " wins!");
+		}
+
 	}
 
 	public void TournamentInterface() 

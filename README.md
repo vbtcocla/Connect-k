@@ -12,3 +12,6 @@ Report template has been available.<br>
 **01/14/2019:** <br>
 Sample AI (Random AI/Poor AI) has been available.<br>
 Fixed an issue caused C++ shell cannot compile<br>
+**01/16/2019:** <br>
+Fixed an issue caused tie cannot be triggered.<br>
+PoorAI v2 uploaded.

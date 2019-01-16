@@ -38,7 +38,15 @@ void GameLogic::Manual()
 		player = player == 1 ? 2 : 1;
 
 	}
-	cout << "Player " << winPlayer << " wins!" << endl;
+	if (winPlayer == -1)
+	{
+	    cout<< "Tie"<<endl;
+	}
+	else
+	{
+	    cout << "Player " << winPlayer << " wins!" << endl;
+	}
+
 }
 
 void GameLogic::TournamentInterface()

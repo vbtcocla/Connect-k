@@ -137,12 +137,17 @@ int Board::IsWin()
 	const int stepCol[] = { 0,0, 1,-1,1,-1, 1,-1 };
 	const int stepRow[] = { 1,-1,0,0, 1,-1,-1, 1 };
 	const int stepSize = 8;
+	bool tie = true;
 	for (int i = 0; i < row; ++i)
 	{
 		for (int j = 0; j < col; ++j)
 		{
 			if (board[i][j] == 0)
-				continue;
+			{
+			    tie = false;
+			    continue;
+			}
+
 			int firstPlayer = board[i][j];
 			for (int stepIndex = 0; stepIndex < stepSize; ++stepIndex)
 			{
@@ -170,6 +175,10 @@ int Board::IsWin()
 				}
 			}
 		}
+	}
+	if (tie)
+	{
+	    return -1;
 	}
 	return 0;
 }

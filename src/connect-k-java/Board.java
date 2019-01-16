@@ -123,13 +123,14 @@ public class Board
 		final int[] stepCol = { 0, 0, 1, -1, 1, -1, 1, -1};
 		final int[] stepRow = { 1, -1, 0, 0, 1, -1, -1, 1};
 		final int stepSize = 8;
-
+        boolean tie = true;
 		for(int i = 0; i < this.row; ++i )
 		{
 			for(int j = 0; j < this.col; j++)
 			{
 				if(this.board.get(i).get(j) == 0)
 				{
+				    tie = false;
 					continue;
 				}
 				int firstPlayer = board.get(i).get(j);
@@ -160,6 +161,10 @@ public class Board
 				}
 
 			}
+		}
+		if (tie)
+		{
+		    return -1;
 		}
 		return 0;
 	}

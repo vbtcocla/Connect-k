@@ -33,9 +33,11 @@ class Board:
 
     def is_win(self):
         steps = [(0,1),(1,0),(0,-1),(-1,0),(1,1),(-1,-1),(1,-1),(-1,1)]
+        tie = True
         for i in range(self.row):
             for j in range(self.col):
                 if self.board[i][j] == 0:
+                    tie = False
                     continue
                 first_player = self.board[i][j]
                 for step in steps:
@@ -50,6 +52,8 @@ class Board:
                             break
                     else:
                         return first_player #wins
+        if tie:
+            return -1
         return 0
 
 

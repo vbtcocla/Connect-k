@@ -37,7 +37,10 @@ class GameLogic:
                 player = 2
             else:
                 player = 1
-        print('player',winPlayer,'wins')
+        if winPlayer == -1:
+            print("Tie")
+        else:
+            print('player',winPlayer,'wins')
 
     def TournamentInterface(self):
         ai = StudentAI(self.col,self.row,self.k,self.g)
