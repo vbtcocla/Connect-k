@@ -15,3 +15,5 @@ Fixed an issue caused C++ shell cannot compile<br>
 **01/16/2019:** <br>
 Fixed an issue caused tie cannot be triggered.<br>
 PoorAI v2 uploaded.
+**01/22/2019:** <br>
+Updated the submission script
