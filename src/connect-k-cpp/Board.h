@@ -8,11 +8,11 @@
 #include <iostream>
 using namespace std;
 class Board {
-private:
+public:
 	bool IsValidMove(int col,int row,bool checkSpace);
 	bool IsValidMove(Move move);
 	vector<vector<int> > board;
-public:
+
 	int col, row, k, g;
 	Board();
 	Board(int col, int row,int k, int g);

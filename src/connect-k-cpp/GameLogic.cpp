@@ -67,8 +67,9 @@ void GameLogic::Run()
 	{
 		AI* studentai = new StudentAI(col, row, k, g);
 		AI* manualai = new ManualAI(col, row, k, g);
-		aiList.push_back(studentai);
 		aiList.push_back(manualai);
+		aiList.push_back(studentai);
+
 		Manual();
 	}
 	else if (mode == "t")

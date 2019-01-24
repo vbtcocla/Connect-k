@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Board 
 {
-	private ArrayList<ArrayList<Integer>> board;
+	public ArrayList<ArrayList<Integer>> board;
 	public int col, row, k, g;
 
 	public Board() 
@@ -55,7 +55,7 @@ public class Board
 		}
 	}
 
-	private boolean IsValidMove(int col, int row, boolean checkSpace) 
+	public boolean IsValidMove(int col, int row, boolean checkSpace)
 	{
 		if (col >= this.col || col < 0)
 		{
@@ -72,7 +72,7 @@ public class Board
 		return true;
 	}
 
-	private boolean IsValidMove(Move move)
+	public boolean IsValidMove(Move move)
 	{
 		if (move.col >= this.col || move.col < 0)
 		{

@@ -14,6 +14,8 @@ Sample AI (Random AI/Poor AI) has been available.<br>
 Fixed an issue caused C++ shell cannot compile<br>
 **01/16/2019:** <br>
 Fixed an issue caused tie cannot be triggered.<br>
-PoorAI v2 uploaded.
+PoorAI v2 uploaded.<br>
 **01/22/2019:** <br>
 Updated the submission script
+**01/23/2019:** <br>
+Fixed the issues that C++ and Java coder cannot access private methods in Board class.
