@@ -18,6 +18,6 @@ PoorAI v2 uploaded.<br>
 **01/22/2019:** <br>
 Updated the submission script<br>
 **01/23/2019:** <br>
-Fixed the issues that C++ and Java coder cannot access private methods in Board class.
+Fixed the issues that C++ and Java coder cannot access private methods in Board class.<br>
 **01/30/2019:** <br>
-Java Makefile added.
+Added Java Makefile.
