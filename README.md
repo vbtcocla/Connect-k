@@ -20,4 +20,6 @@ Updated the submission script<br>
 **01/23/2019:** <br>
 Fixed the issues that C++ and Java coder cannot access private methods in Board class.<br>
 **01/30/2019:** <br>
-Added Java Makefile.
+Added Java Makefile.<br>
+**02/01/2019:** <br>
+AI_runner bug fixed.
