@@ -26,4 +26,6 @@ Fixed an AI_runner bug.<br>
 **02/02/2019:** <br>
 Fixed AI_runner bugs.
 **02/04/2019:** <br>
-Fixed Random AI bugs.
+Fixed Random AI bugs. <br>
+**02/05/2019:** <br>
+Update AI Runner. AI Runner now can display details of unknown error.
