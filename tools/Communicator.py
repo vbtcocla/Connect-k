@@ -30,6 +30,7 @@ class Communicator(object):
                 continue
 
             r = pr.read().rstrip()
+            self.accumulated_time += time.time() - bt
             if r.decode() == ' ' or r.decode() == '':
                 er = per.read()
             if return_stderr:
