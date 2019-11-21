@@ -18,6 +18,7 @@ class GameLogic:
         winPlayer = 0
         move = Move(-1,-1)
         board = Board(self.col,self.row,self.k,self.g)
+        board.show_board()
         while True:
             move = self.ai_list[player-1].get_move(move)
             try:

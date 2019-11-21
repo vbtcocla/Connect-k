@@ -16,6 +16,7 @@ void GameLogic::Manual()
 	bool init = true;
 	Move move(-1, -1);
 	Board board(col, row, k, g);
+        board.ShowBoard();
 	while (true)
 	{
 		move = aiList[player - 1]->GetMove(move);
