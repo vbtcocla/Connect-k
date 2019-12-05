@@ -1,5 +1,5 @@
 #include "GameLogic.h"
-GameLogic::GameLogic(int col, int row, int k,int g, string mode,bool debug)
+GameLogic::GameLogic(int col, int row, int k,int g, string mode,int f,bool debug)
 {
 	this->col = col;
 	this->row = row;
@@ -7,6 +7,7 @@ GameLogic::GameLogic(int col, int row, int k,int g, string mode,bool debug)
 	this->g = g;
 	this->mode = mode;
 	this->debug = debug;
+	this->f = f;
 }
 
 void GameLogic::Manual()
@@ -16,6 +17,7 @@ void GameLogic::Manual()
 	bool init = true;
 	Move move(-1, -1);
 	Board board(col, row, k, g);
+    if (this->f == 1)
         board.ShowBoard();
 	while (true)
 	{
@@ -66,11 +68,15 @@ void GameLogic::Run()
 {
 	if (mode == "m")
 	{
-		AI* studentai = new StudentAI(col, row, k, g);
+	    AI* studentai = new StudentAI(col, row, k, g);
 		AI* manualai = new ManualAI(col, row, k, g);
-		aiList.push_back(manualai);
+	    if (this->f == 1) {
+	    aiList.push_back(manualai);
 		aiList.push_back(studentai);
-
+	    } else {
+	    aiList.push_back(studentai);
+	    aiList.push_back(manualai);
+	    }
 		Manual();
 	}
 	else if (mode == "t")

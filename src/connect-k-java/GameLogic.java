@@ -3,16 +3,17 @@ import java.io.*;
 import java.lang.*;
 
 public class GameLogic {
-	private int col, row, k ,g;
+	private int col, row, k ,g, f;
 	private String mode;
 	private boolean debug;
 	private ArrayList<AI> aiList;
 
-	public GameLogic(int col, int row, int k, int g, String mode, boolean debug) {
+	public GameLogic(int col, int row, int k, int g, int f, String mode, boolean debug) {
 		this.col = col;
 		this.row = row;
 		this.k = k;
 		this.g = g;
+		this.f = f;
 		this.mode = mode;
 		this.debug = debug;
 		aiList = new ArrayList<AI>();
@@ -25,6 +26,8 @@ public class GameLogic {
 		boolean init = true;
 		Move move = new Move(-1,-1);
 		Board board = new Board(col,row,k,g);
+		if (this.f == 1)
+		    board.ShowBoard();
 		while (true)
 		{
 			move = aiList.get(player - 1).GetMove(move);
@@ -78,8 +81,14 @@ public class GameLogic {
 		{
 			AI studentai = new StudentAI(col, row, k, g);
 			AI manualai = new ManualAI(col, row, k, g);
+			if(this.f == 1) {
+			aiList.add(manualai);
+			aiList.add(studentai);
+			} else {
 			aiList.add(studentai);
 			aiList.add(manualai);
+			}
+
 			Manual();
 		}
 

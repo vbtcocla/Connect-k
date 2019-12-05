@@ -5,7 +5,7 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) 
     {
-    	if(args.length < 5)
+    	if(args.length < 6)
     	{
     		System.out.println("Invalid Parameters");
     		System.exit(0);
@@ -15,6 +15,7 @@ public class Main {
 		int row = Integer.parseInt(args[1]);
 		int k = Integer.parseInt(args[2]);
 		int g = Integer.parseInt(args[3]);
+		int f = Integer.parseInt(args[5]);
 		String mode = args[4];
 		boolean debug = false;
 
@@ -23,7 +24,7 @@ public class Main {
 			debug = true;
 		}
 
-		GameLogic main = new GameLogic(col, row, k,g, mode, debug);
+		GameLogic main = new GameLogic(col, row, k,g, mode, f, debug);
 		main.Run();
     }
 }

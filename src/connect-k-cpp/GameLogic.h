@@ -10,12 +10,12 @@
 class GameLogic
 {
 private:
-	int col, row, k,g; 
+	int col, row, k,g,f;
 	string mode;
 	bool debug;
 	vector<AI*> aiList;
 public:
-	GameLogic(int col,int row,int k,int g,string mode,bool debug);
+	GameLogic(int col,int row,int k,int g,string mode, int f, bool debug);
 	void Manual();
 	void TournamentInterface();
 	void Run();

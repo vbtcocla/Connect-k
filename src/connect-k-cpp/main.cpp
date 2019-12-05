@@ -3,7 +3,7 @@
 
 int main(int argc, char *argv[])
 {
-	if (argc < 6)
+	if (argc < 7)
 	{
 		cout << "Invalid Parameters" << endl;
 		return 0;
@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 	int row = atoi(argv[2]);
 	int k = atoi(argv[3]);
 	int g = atoi(argv[4]);
+	int f = atoi(argv[6]);
 	string mode = argv[5];
 	bool debug = false;
 	if (argc == 7 && argv[6] == "-d")
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
 		debug = true;
 	}
 	
-	GameLogic main(col,row,k,g, mode, debug);//col,row,k,g,mode,debug
+	GameLogic main(col,row,k,g, mode, f, debug);//col,row,k,g,mode,debug
 	main.Run();
 	return 0;
 }

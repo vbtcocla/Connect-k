@@ -4,12 +4,13 @@ from StudentAI import *
 
 class GameLogic:
 
-    def __init__(self,col,row,k,g,mode,debug):
+    def __init__(self,col,row,k,g,mode,firstplayer,debug):
         self.col = col
         self.row = row
         self.k = k
         self.g = g
         self.mode = mode
+        self.first_player = firstplayer
         self.debug = debug
         self.ai_list = []
 
@@ -18,7 +19,8 @@ class GameLogic:
         winPlayer = 0
         move = Move(-1,-1)
         board = Board(self.col,self.row,self.k,self.g)
-        board.show_board()
+        if self.first_player: # manual first
+            board.show_board()
         while True:
             move = self.ai_list[player-1].get_move(move)
             try:
@@ -53,9 +55,12 @@ class GameLogic:
 
     def Run(self):
         if self.mode == 'm':
-            self.ai_list.append(ManualAI(self.col, self.row, self.k, self.g))
-            self.ai_list.append(StudentAI(self.col,self.row,self.k,self.g))
-
+            if self.first_player: # manual first
+                self.ai_list.append(ManualAI(self.col, self.row, self.k, self.g))
+                self.ai_list.append(StudentAI(self.col, self.row, self.k, self.g))
+            else:
+                self.ai_list.append(StudentAI(self.col, self.row, self.k, self.g))
+                self.ai_list.append(ManualAI(self.col, self.row, self.k, self.g))
             self.Manual()
         if self.mode == 't':
             self.TournamentInterface()
