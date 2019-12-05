@@ -8,7 +8,7 @@ public class GameLogic {
 	private boolean debug;
 	private ArrayList<AI> aiList;
 
-	public GameLogic(int col, int row, int k, int g, int f, String mode, boolean debug) {
+	public GameLogic(int col, int row, int k, int g,  String mode, int f, boolean debug) {
 		this.col = col;
 		this.row = row;
 		this.k = k;
