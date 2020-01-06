@@ -89,7 +89,7 @@ public class Board
 		return true;
 	}
 
-	public Board MakeMove(Move move, int player) throws InvalidMoveError
+	public Board makeMove(Move move, int player) throws InvalidMoveError
 	{
 		Board result_board = new Board(this);
 		if (player != 1 && player != 2)
@@ -118,7 +118,7 @@ public class Board
 		return result_board;
 	}
 
-	public int IsWin() 
+	public int isWin()
 	{
 		final int[] stepCol = { 0, 0, 1, -1, 1, -1, 1, -1};
 		final int[] stepRow = { 1, -1, 0, 0, 1, -1, -1, 1};
@@ -169,7 +169,7 @@ public class Board
 		return 0;
 	}
 
-	public void ShowBoard()
+	public void showBoard()
 	{
 		for (int i = 0; i < this.row; ++i)
 		{

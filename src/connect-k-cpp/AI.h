@@ -7,17 +7,18 @@
 class AI
 {
 protected:
-	int col, row, k, g, player;
+	int col, row, p,g, player;
 public:
 
-	AI(int col, int row, int k, int g)
+	AI(int col, int row, int p,int g)
 	{
 		this->col = col;
 		this->row = row;
-		this->k = k;
+		this->p = p;
 		this->g = g;
+
 	}
-	virtual Move GetMove(Move board) = 0;
+	virtual Move GetMove(Move move) = 0;
 	virtual ~AI(){}
 };
 

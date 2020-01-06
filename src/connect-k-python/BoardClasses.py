@@ -14,13 +14,14 @@ class Board:
                 self.board[i].append(0)
 
     def make_move(self,move,player):
+        if move is None:
+            raise InvalidMoveError
         result_board = copy.deepcopy(self)
         if type(move) is tuple:
             move = Move(move[0],move[1])
         if type(player) is not int or (player != 1 and player != 2):
             raise InvalidMoveError()
         if (not self.is_valid_move(move.col,move.row)):
-            print(move.col,move.row)
             raise InvalidMoveError()
         if self.g == 0:
             result_board.board[move.row][move.col] = player
@@ -59,19 +60,19 @@ class Board:
 
 
 
-    def show_board(self):
+    def show_board(self,fh):
         for i in range(self.row):
-            print(i,"|",sep="",end="")
+            print(i,"|",sep="",end="",file=fh)
             for j in range(self.col):
-                print("%3s"%(str(self.board[i][j])),end="")
-            print()
+                print("%3s"%(str(self.board[i][j])),end="",file=fh)
+            print(file=fh)
         for j in range(self.col):
-            print("----",end="")
-        print()
-        print("%2s"%" ",end="")
+            print("----",end="",file=fh)
+        print(file=fh)
+        print("%2s"%" ",end="",file=fh)
         for j in range(self.col):
-            print("%3s"%str(j),end="")
-        print("\n")
+            print("%3s"%str(j),end="",file=fh)
+        print("\n",file=fh)
 
     def is_valid_move(self,col,row,check_space=True):
         if col < 0 or col >= self.col:
@@ -89,3 +90,16 @@ class Move:
             return
         self.col = col
         self.row = row
+
+    @classmethod
+    def from_str(cls, s: str):
+        """
+        This class enables the move object to be made from a str
+        @param s: string that describes the class. Eg '(0,0)'
+        """
+        col,row = map(lambda x:int(x),s.split(" "))
+        return cls(col,row)
+
+    def __str__(self):
+        return str(self.col)+" "+str(self.row)
+

@@ -17,9 +17,9 @@ public:
 	Board();
 	Board(int col, int row,int k, int g);
 	Board(const Board& b);
-	Board MakeMove(Move move,int player);
-	int IsWin();
-	void ShowBoard();
+	Board makeMove(Move move,int player);
+	int isWin();
+	void showBoard();
 };
 
 class InvalidMoveError

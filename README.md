@@ -35,3 +35,6 @@ Update Average AI.<br>
 Update Average AI v2.<br>
 Update Good AI.<br>
 Update Super AI.<br>
+**01/06/2020:** <br>
+Update project framework<br>
+Sample AIs will be back soon.

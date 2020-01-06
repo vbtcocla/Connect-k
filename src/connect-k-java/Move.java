@@ -15,4 +15,18 @@ public class Move
 		this.col = col;
 		this.row = row;
 	}
+
+	public Move(String s)
+	{
+        Scanner reader = new Scanner(s);
+        col = reader.nextInt();
+		row = reader.nextInt();
+		this.col = col;
+		this.row = row;
+	}
+
+	public String toString()
+	{
+	    return col+" "+row;
+	}
 }

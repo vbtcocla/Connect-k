@@ -52,7 +52,7 @@ Board::Board(const Board& b)
 
 }
 
-void Board::ShowBoard()
+void Board::showBoard()
 {
 	for (int i = 0; i < this->row; ++i)
 	{
@@ -103,7 +103,7 @@ bool Board::IsValidMove(Move move)
 	return true;
 }
 
-Board Board::MakeMove(Move move, int player)
+Board Board::makeMove(Move move, int player)
 {
 	Board result_board(*this);
 	if (player != 1 && player != 2)
@@ -132,7 +132,7 @@ Board Board::MakeMove(Move move, int player)
 	return result_board;
 }
 
-int Board::IsWin()
+int Board::isWin()
 {
 	const int stepCol[] = { 0,0, 1,-1,1,-1, 1,-1 };
 	const int stepRow[] = { 1,-1,0,0, 1,-1,-1, 1 };

@@ -5,6 +5,7 @@ class ManualAI():
         pass
 
     def get_move(self,move):
+        c,r = (0,0)
         while True:
             try:
                 c,r = map(lambda x:int(x),input("{col} {row}:").split(' '))
