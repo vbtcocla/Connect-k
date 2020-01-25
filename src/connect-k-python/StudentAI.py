@@ -3,6 +3,7 @@ from BoardClasses import Move
 from BoardClasses import Board
 #The following part should be completed by students.
 #Students can modify anything except the class name and exisiting functions and varibles.
+#Start our own AI
 class StudentAI():
     col = 0
     row = 0
