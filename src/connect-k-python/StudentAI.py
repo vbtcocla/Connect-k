@@ -36,7 +36,7 @@ class StudentAI():
         
 
         #Greedy best-first search
-        best = -self.k
+        best = -self.row - self.col
         best_move = Move(-1,-1)
         for j in range(self.col):
             if(self.g == 0):
@@ -98,11 +98,11 @@ class StudentAI():
                                 break
 
                             #if current line already wins, make it the next move
-                            elif(player == self.player and k == self.k):
+                            elif(player == self.player and k == self.k-2):
                                 curr_max = self.col + self.row
 
                             #if opponent is winning, try to stop it
-                            elif(player != self.player == self.k-1):
+                            elif(player != self.player and k == self.k-3):
                                 curr_max = self.col + self.row
                             
                             else:
