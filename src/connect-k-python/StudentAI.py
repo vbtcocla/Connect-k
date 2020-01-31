@@ -4,7 +4,6 @@ from BoardClasses import Board
 import copy
 #The following part should be completed by students.
 #Students can modify anything except the class name and exisiting functions and varibles.
-#Start our own AI
 class StudentAI():
     col = 0
     row = 0
@@ -88,19 +87,24 @@ class StudentAI():
                         for k in range(self.k-1):
                             temp_i+=step[0]
                             temp_j+=step[1]
+
                             #if current line can't win, abandon it
                             if(temp_i < 0 or temp_j < 0 or temp_i >= self.row 
                             or temp_j >= self.col or temp_board[temp_i][temp_j] == player % 2 + 1):
                                 curr_max = 0
                                 break
+
                             elif(temp_board[temp_i][temp_j] == 0):
                                 break
+
                             #if current line already wins, make it the next move
                             elif(player == self.player and k == self.k):
                                 curr_max = self.col + self.row
+
                             #if opponent is winning, try to stop it
                             elif(player != self.player == self.k-1):
                                 curr_max = self.col + self.row
+                            
                             else:
                                 curr_max+=1
                         if(player == self.player):
