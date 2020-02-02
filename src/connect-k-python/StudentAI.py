@@ -84,25 +84,32 @@ class StudentAI():
                         curr_max = 1
                         temp_i = i
                         temp_j = j
-                        for k in range(self.k-1):
+                        for k in range(1, self.k):
                             temp_i+=step[0]
                             temp_j+=step[1]
 
                             #if current line can't win, abandon it
                             if(temp_i < 0 or temp_j < 0 or temp_i >= self.row 
                             or temp_j >= self.col or temp_board[temp_i][temp_j] == player % 2 + 1):
-                                curr_max = 0
+                                curr_max = -self.col - self.row
                                 break
 
                             elif(temp_board[temp_i][temp_j] == 0):
-                                break
+                                #if there is a move after '0', 
+                                # see it as a potential consecutive line and continue
+                                if(temp_i + step[0] >= 0 and temp_j + step[1] >= 0 and temp_i + step[0] < self.row 
+                            and temp_j + step[1] < self.col and temp_board[temp_i + step[0]][temp_j + step[1]] == player):
+                                    continue
+
+                                else:
+                                    break
 
                             #if current line already wins, make it the next move
-                            elif(player == self.player and k == self.k-2):
+                            elif(player == self.player and k == self.k-1):
                                 curr_max = self.col + self.row
 
                             #if opponent is winning, try to stop it
-                            elif(player != self.player and k == self.k-3):
+                            elif(player != self.player and k == self.k-2):
                                 curr_max = self.col + self.row
                             
                             else:
