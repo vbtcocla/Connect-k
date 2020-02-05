@@ -9,6 +9,7 @@ class StudentAI():
     row = 0
     k = 0
     g = 0
+    cutoff = 0
 
     def __init__(self,col,row,k,g):
         self.g = g
@@ -17,6 +18,7 @@ class StudentAI():
         self.k = k
         self.board = Board(col,row,k,g)
         self.player = 0
+        self.cutoff = self.col + self.row
 
     def get_move(self,move):
         # if self.g == 0:
@@ -59,6 +61,8 @@ class StudentAI():
                     if(score > best):
                         best = score
                         best_move = Move(j, 0)
+                    if(score == self.cutoff):
+                        break
         self.board = self.board.make_move(best_move,self.player)
         return best_move
     
@@ -97,12 +101,9 @@ class StudentAI():
 
                             elif(temp_board[temp_i][temp_j] == 0):
                                 #if there is a move after '0', 
-                                #see it as a potential consecutive line, skip the '0' and continue
-                                temp_i += step[0]
-                                temp_j += step[1]
-                                if(temp_i >= 0 and temp_j >= 0 and temp_i < self.row 
-                            and temp_j < self.col and temp_board[temp_i][temp_j] == player):
-                                    curr_max+=1
+                                #see it as a potential consecutive line and continue
+                                if(temp_i+step[0] >= 0 and temp_j+step[1] >= 0 and temp_i+step[0] < self.row 
+                            and temp_j+step[1] < self.col and temp_board[temp_i+step[0]][temp_j+step[1]] == player):
                                     isPotential = True
 
                                 else:
@@ -110,11 +111,13 @@ class StudentAI():
 
                             #if current line already wins, make it the next move
                             elif(player == self.player and curr_max == self.k-1):
-                                curr_max = 2 * (self.col + self.row)
+                                return self.cutoff
 
                             #if opponent is winning, try to stop it
-                            elif(player != self.player and curr_max == self.k-2):
-                                curr_max = self.col + self.row
+                            elif(player != self.player and (curr_max == self.k-2
+                            or (curr_max == self.k-3 and i-step[0] >= 0 and i-step[0] < self.row
+                            and j-step[1] >= 0 and j-step[1] < self.col and temp_board[i-step[0]][j-step[1]] == 0))):
+                                curr_max = self.cutoff
                                 if(isPotential):
                                     break
                             
