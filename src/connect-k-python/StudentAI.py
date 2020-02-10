@@ -2,6 +2,9 @@ from random import randint
 from BoardClasses import Move
 from BoardClasses import Board
 import copy
+
+from GameLogic import *
+import sys
 #The following part should be completed by students.
 #Students can modify anything except the class name and exisiting functions and varibles.
 class StudentAI():
@@ -128,3 +131,15 @@ class StudentAI():
                         else:
                             opponent_max = max(curr_max, opponent_max)
         return self_max-opponent_max
+
+if __name__ == '__main__':
+    if len(sys.argv) < 6:
+        print('Invalid Parameters')
+        sys.exit(-1)
+    col = int(sys.argv[1])
+    row = int(sys.argv[2])
+    k = int(sys.argv[3])
+    g = int(sys.argv[4])
+    mode = sys.argv[5]
+    main = GameLogic(col,row,k,g,mode,debug=True)
+    main.Run()
