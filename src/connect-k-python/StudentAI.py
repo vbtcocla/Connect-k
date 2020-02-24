@@ -7,6 +7,7 @@ from GameLogic import *
 import sys
 #The following part should be completed by students.
 #Students can modify anything except the class name and exisiting functions and varibles.
+
 class StudentAI():
     col = 0
     row = 0
@@ -38,43 +39,24 @@ class StudentAI():
         #update board
         if(move.row != -1 or move.col != -1):
             self.board = self.board.make_move(move, self.player % 2 + 1)
-        
 
         #Greedy best-first search
-        best = -self.row - self.col
+        best = -self.cutoff
         best_move = Move(-1,-1)
         for j in range(self.col):
-            if(self.g == 0):
-                for i in range(self.row):
-                    #make a move on a temp board and evaluate the move
-                    if(self.board.board[i][j] == 0):
-                        temp_board = copy.deepcopy(self.board.board)
-                        temp_board[i][j] = self.player
-                        score = self.evaluate(temp_board)
-                        if(score > best):
-                            best = score
-                            best_move = Move(j, i)
-            else:
+            for i in range(self.row):
                 #make a move on a temp board and evaluate the move
-                i = self.space_on_column(j)
-                if(i != -1):
-                    temp_board = copy.deepcopy(self.board.board)
-                    temp_board[i][j] = self.player
-                    score = self.evaluate(temp_board)
+                if(self.board.is_valid_move(j, i)):
+                    next_move = Move(j, i)
+                    temp_board = self.board.make_move(next_move,self.player)
+                    score = self.evaluate(temp_board.board)
                     if(score > best):
                         best = score
-                        best_move = Move(j, 0)
+                        best_move = Move(j, i)
                     if(score == self.cutoff):
                         break
         self.board = self.board.make_move(best_move,self.player)
         return best_move
-    
-    #determine the first space on a column
-    def space_on_column(self, col):
-        for i in range(self.row-1, -1, -1):
-            if(self.board.board[i][col] == 0):
-                return i
-        return -1
 
     def evaluate(self,temp_board):
         #h(n) = the max number of consecutive moves by us - the max number of consecutive moves by our opponent
