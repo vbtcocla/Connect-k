@@ -10,6 +10,7 @@ import sys
 #The following part should be completed by students.
 #Students can modify anything except the class name and exisiting functions and varibles.
 class MyBoard(Board):
+    #get valid moves
     def get_moves(self):
         moves = []
         if(self.g == 0):
@@ -133,7 +134,8 @@ class StudentAI():
     def alpha_beta(self,board,player,alpha,beta,depth,end_time):
         moves = board.get_moves()
         current_score = self.evaluate(board.board)
-        if(time.time() >= end_time or depth == 0 or current_score >= self.cutoff):
+        if(time.time() >= end_time or depth == 0 or current_score >= self.cutoff
+        or current_score <= -self.cutoff or len(moves) == 0):
             return current_score
         if(player == self.player):
             #alpha
@@ -162,7 +164,7 @@ class StudentAI():
                 if(temp_board[i][j] == 0 or temp_board[i][j] == self.player):
                     for step in steps:
                         consecutive_moves = 0
-                        if(temp_board[i][j] == self.get_opponent_number(self.player)):
+                        if(temp_board[i][j] == self.player):
                             consecutive_moves += 1
                         curr_i = i
                         curr_j = j
