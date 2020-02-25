@@ -52,7 +52,7 @@ class StudentAI():
         self.board = MyBoard(col,row,k,g)
         self.player = 0
         self.cutoff = 10 * (self.col + self.row)
-        self.time_limit = 1.0
+        self.time_limit = 5.0
 
     def get_move(self,move):
         # if self.g == 0:
@@ -120,9 +120,10 @@ class StudentAI():
     def IDS(self,board,time_limit):
         end_time = time.time() + time_limit
         depth = 1
-        score = -self.cutoff-1
+        score = 0
         while(time.time() < end_time):
-            score = self.alpha_beta(board,self.player,-self.cutoff-1,self.cutoff+1,depth,end_time)
+            score = self.alpha_beta(board,self.get_opponent_number(self.player),
+                -self.cutoff-1,self.cutoff+1,depth,end_time)
             if(score >= self.cutoff):
                 return score
             depth += 1
@@ -152,60 +153,51 @@ class StudentAI():
             return beta
 
     def evaluate(self,temp_board):
-        #h(n) = the max number of consecutive moves by us - the max number of consecutive moves by our opponent
-        steps = [(0,1),(1,0),(0,-1),(-1,0),(1,1),(-1,-1),(1,-1),(-1,1)]
-        self_max = 0
-        opponent_max = 0
-
-        #brute force solution to count the max number of consecutive moves at every position
-        for i in range(self.row):
-            for j in range(self.col):
-                player = temp_board[i][j]
-                if(player != 0):
+        #h(n) = the number of possible winning lines - the number of opponent's possible winning lines
+        steps = [(0,1),(1,0),(1,1),(-1,1)]
+        winning_lines = 0
+        losing_lines = 0
+        for j in range(self.col):
+            for i in range(self.row):
+                if(temp_board[i][j] == 0 or temp_board[i][j] == self.player):
                     for step in steps:
-                        isPotential = False
-                        curr_max = 1
-                        temp_i = i
-                        temp_j = j
-                        for k in range(1, self.k):
-                            temp_i+=step[0]
-                            temp_j+=step[1]
-
-                            #if current line can't win, abandon it
-                            if(temp_i < 0 or temp_j < 0 or temp_i >= self.row 
-                            or temp_j >= self.col or temp_board[temp_i][temp_j] == player % 2 + 1):
-                                curr_max = 0
+                        consecutive_moves = 0
+                        if(temp_board[i][j] == self.get_opponent_number(self.player)):
+                            consecutive_moves += 1
+                        curr_i = i
+                        curr_j = j
+                        winning_lines += 1
+                        for k in range(self.k-1):
+                            curr_i += step[0]
+                            curr_j += step[1]
+                            if(curr_i < 0 or curr_i >= self.row or curr_j >= self.col
+                            or temp_board[curr_i][curr_j] == self.get_opponent_number(self.player)):
+                                winning_lines -= 1
                                 break
-
-                            elif(temp_board[temp_i][temp_j] == 0):
-                                #if there is a move after '0', 
-                                #see it as a potential consecutive line and continue
-                                if(temp_i+step[0] >= 0 and temp_j+step[1] >= 0 and temp_i+step[0] < self.row 
-                            and temp_j+step[1] < self.col and temp_board[temp_i+step[0]][temp_j+step[1]] == player):
-                                    isPotential = True
-
-                                else:
-                                    break
-
-                            #if current line already wins, make it the next move
-                            elif(player == self.player and curr_max == self.k-1):
-                                return self.cutoff
-
-                            #if opponent is winning, try to stop it
-                            elif(player != self.player and (curr_max == self.k-2
-                            or (curr_max == self.k-3 and i-step[0] >= 0 and i-step[0] < self.row
-                            and j-step[1] >= 0 and j-step[1] < self.col and temp_board[i-step[0]][j-step[1]] == 0))):
-                                curr_max = self.cutoff
-                                if(isPotential):
-                                    break
-                            
-                            else:
-                                curr_max+=1
-                        if(player == self.player):
-                            self_max = max(curr_max, self_max)
-                        else:
-                            opponent_max = max(curr_max, opponent_max)
-        return self_max-opponent_max
+                            elif(temp_board[curr_i][curr_j] != 0):
+                                consecutive_moves += 1
+                        if(consecutive_moves >= self.k):
+                            return self.cutoff
+                if(temp_board[i][j] == 0 or temp_board[i][j] == self.get_opponent_number(self.player)):
+                    for step in steps:
+                        consecutive_moves = 0
+                        if(temp_board[i][j] == self.get_opponent_number(self.player)):
+                            consecutive_moves += 1
+                        curr_i = i
+                        curr_j = j
+                        losing_lines += 1
+                        for k in range(self.k-1):
+                            curr_i += step[0]
+                            curr_j += step[1]
+                            if(curr_i < 0 or curr_i >= self.row or curr_j >= self.col
+                            or temp_board[curr_i][curr_j] == self.player):
+                                losing_lines -= 1
+                                break
+                            elif(temp_board[curr_i][curr_j] != 0):
+                                consecutive_moves += 1
+                        if(consecutive_moves >= self.k):
+                            return -self.cutoff
+        return winning_lines - losing_lines
 
 if __name__ == '__main__':
     if len(sys.argv) < 6:
