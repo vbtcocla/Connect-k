@@ -1,0 +1,6 @@
+python3 AI_runner.py 5 5 4 1 l /home/zhihonz2/Connect-k/src/connect-k-python/StudentAI.py /home/zhihonz2/Connect-k/tools/SampleAIs/AverageAI_v2.pyc
+python3 AI_runner.py 5 5 4 1 l /home/zhihonz2/Connect-k/tools/SampleAIs/AverageAI_v2.pyc /home/zhihonz2/Connect-k/src/connect-k-python/StudentAI.py
+python3 AI_runner.py 7 7 5 1 l /home/zhihonz2/Connect-k/src/connect-k-python/StudentAI.py /home/zhihonz2/Connect-k/tools/SampleAIs/AverageAI_v2.pyc
+python3 AI_runner.py 7 7 5 1 l /home/zhihonz2/Connect-k/tools/SampleAIs/AverageAI_v2.pyc /home/zhihonz2/Connect-k/src/connect-k-python/StudentAI.py
+python3 AI_runner.py 5 5 4 0 l /home/zhihonz2/Connect-k/src/connect-k-python/StudentAI.py /home/zhihonz2/Connect-k/tools/SampleAIs/AverageAI_v2.pyc
+python3 AI_runner.py 7 7 5 0 l /home/zhihonz2/Connect-k/src/connect-k-python/StudentAI.py /home/zhihonz2/Connect-k/tools/SampleAIs/AverageAI_v2.pyc

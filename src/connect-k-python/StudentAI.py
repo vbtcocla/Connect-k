@@ -1,10 +1,8 @@
-from random import randint
 from BoardClasses import Move
 from BoardClasses import Board
 import copy
 
 import time
-
 from GameLogic import *
 import sys
 #The following part should be completed by students.
@@ -37,6 +35,7 @@ class MyBoard(Board):
         if (check_space and self.board[row][col] != 0):
             return False
         return True
+    
 
 class StudentAI():
     col = 0
@@ -53,7 +52,7 @@ class StudentAI():
         self.board = MyBoard(col,row,k,g)
         self.player = 0
         self.cutoff = 10 * (self.col + self.row)
-        self.time_limit = 5.0
+        self.time_limit = 15.0
 
     def get_move(self,move):
         # if self.g == 0:
@@ -115,6 +114,9 @@ class StudentAI():
         self.board = self.board.make_move(best_move,self.player)
         return best_move
 
+    def is_in_bound(self,col,row):
+        return col >= 0 and col < self.col and row >= 0 and row < self.row
+
     def get_opponent_number(self,player_number):
         return player_number % 2 + 1
 
@@ -123,8 +125,10 @@ class StudentAI():
         depth = 1
         score = 0
         while(time.time() < end_time):
-            score = self.alpha_beta(board,self.get_opponent_number(self.player),
+            new_score = self.alpha_beta(board,self.get_opponent_number(self.player),
                 -self.cutoff-1,self.cutoff+1,depth,end_time)
+            if time.time() <= end_time:
+                score = new_score
             if(score >= self.cutoff):
                 return score
             depth += 1
@@ -132,9 +136,11 @@ class StudentAI():
     
     #alpha-beta prunning search
     def alpha_beta(self,board,player,alpha,beta,depth,end_time):
+        if time.time() > end_time:
+            return 0
         moves = board.get_moves()
         current_score = self.evaluate(board.board)
-        if(time.time() >= end_time or depth == 0 or current_score >= self.cutoff
+        if(depth == 0 or current_score >= self.cutoff
         or current_score <= -self.cutoff or len(moves) == 0):
             return current_score
         if(player == self.player):
@@ -156,7 +162,7 @@ class StudentAI():
 
     def evaluate(self,temp_board):
         #h(n) = the number of possible winning lines - the number of opponent's possible winning lines
-        steps = [(0,1),(1,0),(1,1),(-1,1)]
+        steps = [(0,1),(1,0),(1,1),(1,-1)]
         winning_lines = 0
         losing_lines = 0
         for j in range(self.col):
@@ -172,12 +178,13 @@ class StudentAI():
                         for k in range(self.k-1):
                             curr_i += step[0]
                             curr_j += step[1]
-                            if(curr_i < 0 or curr_i >= self.row or curr_j >= self.col
+                            if(not self.is_in_bound(curr_j,curr_i)
                             or temp_board[curr_i][curr_j] == self.get_opponent_number(self.player)):
                                 winning_lines -= 1
                                 break
                             elif(temp_board[curr_i][curr_j] != 0):
                                 consecutive_moves += 1
+                        # if we win then cut off
                         if(consecutive_moves >= self.k):
                             return self.cutoff
                 if(temp_board[i][j] == 0 or temp_board[i][j] == self.get_opponent_number(self.player)):
@@ -191,13 +198,19 @@ class StudentAI():
                         for k in range(self.k-1):
                             curr_i += step[0]
                             curr_j += step[1]
-                            if(curr_i < 0 or curr_i >= self.row or curr_j >= self.col
+                            if(not self.is_in_bound(curr_j,curr_i)
                             or temp_board[curr_i][curr_j] == self.player):
                                 losing_lines -= 1
                                 break
                             elif(temp_board[curr_i][curr_j] != 0):
                                 consecutive_moves += 1
-                        if(consecutive_moves >= self.k):
+                            # Avoid being defeated by k-1 consecutive moves with opening ends
+                            if(consecutive_moves >= self.k - 1
+                            and self.is_in_bound(j-step[1],i-step[0]) and temp_board[i-step[0]][j-step[1]]==0
+                            and self.is_in_bound(curr_j+step[1],curr_i+step[0]) and temp_board[curr_i+step[0]][curr_j+step[1]]==0):
+                                return -self.cutoff
+                        # if opponent wins then cut off
+                        if consecutive_moves >= self.k:
                             return -self.cutoff
         return winning_lines - losing_lines
 
